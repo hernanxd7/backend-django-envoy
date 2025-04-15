@@ -1,0 +1,31 @@
+<div class="container">
+  <h2>Lista de Papers</h2>
+  
+  <div *ngIf="loading$ | async" class="loading">Cargando...</div>
+
+  <div *ngIf="error$ | async as error" class="error">
+    Error: {{ error }}
+  </div>
+  
+  <a routerLink="/papers/create" class="btn-add">Nuevo Paper</a>
+
+  <table *ngIf="papers$ | async as papers">
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Abstract</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let paper of papers">
+          <td>{{ paper.title }}</td>
+          <td>{{ paper.abstract | slice:0:100 }}...</td>
+          <td class="actions">
+            <button (click)="editPaper(paper.id)" class="btn-edit">Editar</button>
+            <button (click)="deletePaper(paper.id)" class="btn-delete">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>

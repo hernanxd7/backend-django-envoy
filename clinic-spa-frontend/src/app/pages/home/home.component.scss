@@ -1,0 +1,30 @@
+.item-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-name {
+  font-weight: bold;
+}
+
+.item-email {
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 14px;
+}
+
+.item-actions {
+  display: flex;
+  align-items: center;
+}
+
+mat-list-item {
+  height: auto !important;
+  padding: 8px 0;
+}

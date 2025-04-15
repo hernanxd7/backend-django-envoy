@@ -1,0 +1,44 @@
+
+
+<ng-content>
+  <div *ngIf="loading$ | async">Loading comments...</div>
+  <div *ngIf="error$ | async">Error loading comments.</div>
+  <div>
+    <button mat-raised-button color="primary" [routerLink]="['/counter']">
+      <!--<mat-icon>go to counter</mat-icon>-->
+      Go to Counter
+    </button>
+    <button mat-raised-button color="primary" [routerLink]="['/papers']">
+      <!--<mat-icon>go to counter</mat-icon>-->
+      Go to Papers
+    </button>
+  </div>
+  <mat-list>
+
+    <!--@for (item of comments; track $index) {-->
+
+      <mat-list-item *ngFor="let item of comments$ | async; let i = index">
+        <div mat-line class="item-content">
+          <div class="item-info">
+            <span class="item-name">{{item.name}}</span>
+            <span class="item-email">{{item.email}}</span>
+          </div>
+          <div class="item-actions">
+            <button mat-icon-button color="warn" aria-label="Delete" (click)="deleteItem(item)">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" aria-label="Edit" (click)="editItem(item)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" aria-label="View" (click)="viewItem(item)">
+              <mat-icon>visibility</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    <!--}-->
+  </mat-list>
+
+
+</ng-content>

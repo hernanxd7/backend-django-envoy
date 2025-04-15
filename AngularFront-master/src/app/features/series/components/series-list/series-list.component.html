@@ -1,0 +1,35 @@
+<div class="container">
+  <h2>Catálogo de Series</h2>
+  
+  <div *ngIf="cargando$ | async" class="loading">Cargando...</div>
+
+  <div *ngIf="error$ | async as error" class="error">
+    Error: {{ error }}
+  </div>
+  
+  <a routerLink="/main/series/crear" class="btn-add">Añadir Serie</a>
+
+  <table *ngIf="series$ | async as series">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Temporadas</th>
+        <th>Fecha de Lanzamiento</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let serie of series">
+          <td>{{ serie.id }}</td>
+          <td>{{ serie.nombre }}</td>
+          <td>{{ serie.temporadas }}</td>
+          <td>{{ serie.fecha_lanzamiento }}</td>
+          <td class="actions">
+            <button (click)="editarSerie(serie.id)" class="btn-edit">Editar</button>
+            <button (click)="eliminarSerie(serie.id)" class="btn-delete">Eliminar</button>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+</div>

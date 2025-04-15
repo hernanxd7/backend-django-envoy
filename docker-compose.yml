@@ -1,0 +1,35 @@
+services:
+  django_project1:
+    container_name: django_project1
+    build: .
+    ports:
+      - "8000:8000"
+    command: python manage.py runserver 0.0.0.0:8000
+    networks:
+      - my_network
+
+  django_project2:
+    container_name: django_project2
+    build: .
+    ports:
+      - "8001:8001"
+    command: python manage.py runserver 0.0.0.0:8001
+    networks:
+      - my_network
+
+  envoy:
+    image: envoyproxy/envoy:v1.23-latest
+    volumes:
+      - ./envoy.yaml:/etc/envoy/envoy.yaml:ro
+    ports:
+      - "10000:10000"
+      - "9901:9901"
+    depends_on:
+      - django_project1
+      - django_project2
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge

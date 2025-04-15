@@ -1,0 +1,36 @@
+<div class="container">
+    <h2>Catálogo de Comics</h2>
+    
+    <div *ngIf="cargando$ | async" class="loading">Cargando...</div>
+  
+    <div *ngIf="error$ | async as error" class="error">
+      Error: {{ error }}
+    </div>
+    
+    <a routerLink="/main/comics/crear" class="btn-add">Añadir Comic</a>
+
+      
+      <table *ngIf="comics$ | async as comics">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Autor</th>
+            <th>Fecha de Lanzamiento</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let comic of comics">
+            <td>{{ comic.id }}</td>
+            <td>{{ comic.nombre }}</td>
+            <td>{{ comic.autor }}</td>
+            <td>{{ comic.fecha_lanzamiento }}</td>
+            <td class="actions">
+              <button (click)="editarComic(comic.id)" class="btn-edit">Editar</button>
+              <button (click)="eliminarComic(comic.id)" class="btn-delete">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
